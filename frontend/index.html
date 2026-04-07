@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head><title>Auth</title></head>
+<body>
+<h2>Register</h2>
+<input id='ruser' placeholder='username'>
+<input id='remail' placeholder='email'>
+<input id='rpass' type='password' placeholder='password'>
+<button onclick='register()'>Register</button>
+
+<h2>Login</h2>
+<input id='lemail' placeholder='email'>
+<input id='lpass' type='password' placeholder='password'>
+<button onclick='login()'>Login</button>
+
+<p id='msg'></p>
+
+<script>
+function register(){
+ fetch('http://localhost:8080/api/auth/register',{
+ method:'POST',
+ headers:{'Content-Type':'application/json'},
+ body:JSON.stringify({username:ruser.value,email:remail.value,password:rpass.value})
+ }).then(r=>r.text()).then(d=>msg.innerText=d);
+}
+
+function login(){
+ fetch('http://localhost:8080/api/auth/login',{
+ method:'POST',
+ headers:{'Content-Type':'application/json'},
+ body:JSON.stringify({email:lemail.value,password:lpass.value})
+ }).then(r=>r.text()).then(d=>msg.innerText=d);
+}
+</script>
+</body>
+</html>
